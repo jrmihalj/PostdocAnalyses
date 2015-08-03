@@ -1,0 +1,46 @@
+model{
+
+##########
+# Priors #
+##########
+# Virus-level parameters:
+for(v in 1:4){
+	C[v] ~ dunif(0,30)
+	nu[v] ~ dnorm(0,.0001)T(0,1000)
+	mu[v] ~ dnorm(0,10)
+}
+
+# Error in Cad.Density parameters:
+for(d in 1:3){
+	p.mean[d] ~ dnorm(0, 100)
+	p.sd[d] ~ dgamma(0.001,0.001)
+	p.tau[d] <- 1 / (p.sd[d])^2
+}
+
+##############
+# LIKELIHOOD #
+##############
+
+for(i in 1:N.obs){
+
+	n.inf[i] ~ dbin(prob[i], n.recov[i])
+	prob[i] <- 1 - (1 + (C[Virus[i]])^2 * nu[Virus[i]] * 
+				exp(-mu[Virus[i]] * decay[i]) * (P[i]+0.0001) * 7)^(-1/(C[Virus[i]]^2))
+	
+	#Model Y error:
+	n.inf.na[i] ~ dbin(prob[i], n.recov[i])
+
+} 
+
+#########################
+# ERROR IN CAD. DENSITY #
+#########################
+# Cadaver density is trimodal, so need to have three means/precisions
+
+for(i in 1:N.obs){
+	P[i] ~ dnorm(p.mean[Cad.Den[i]], p.tau[Cad.Den[i]])
+}
+
+
+
+}
