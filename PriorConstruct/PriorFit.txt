@@ -1,0 +1,20 @@
+model {
+  #### PRIORS #####
+
+  # FOR GAMMA #
+  scale ~ dgamma(0.001, 0.001)
+  shape ~ dgamma(0.001, 0.001)
+  rate <- 1/scale
+
+  # FOR LNORM #
+  mu ~ dnorm(0,.01)
+  sd ~ dunif(0,100)
+  tau <- 1 / (sd^2)
+  
+  ### LIKELIHOOD ###
+  for(i in 1:length(nu.combined1)){
+      nu.combined1[i] ~ dgamma( rate , shape )
+      nu.combined2[i] ~ dlnorm( mu, tau )
+  }
+
+}

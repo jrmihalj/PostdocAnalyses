@@ -9,18 +9,14 @@
 library(ggmcmc)
 source("HDI.R")
 
-C.data <- ggs(out, family="C")
-nu.data <- ggs(out, family="nu")
-mu.data <- ggs(out, family="mu")
-
 plots.fitted1 <- list()
 
 for(i in 1:4){
 	C.vals <- NULL; nu.vals <- NULL; mu.vals <- NULL;
 
 	C.vals <- subset(C.data, Parameter==paste("C[", i, "]", sep=""))$value
-	nu.vals <- subset(nu.data, Parameter==paste("nu[", i, "]", sep=""))$value
-	mu.vals <- subset(mu.data, Parameter==paste("mu[", i, "]", sep=""))$value
+	nu.vals <- subset(nu.bar.data, Parameter==paste("nu.bar[", i, "]", sep=""))$value
+	mu.vals <- subset(mu.cv.data, Parameter==paste("mu[", i, "]", sep=""))$value
 	
 	C.mode <- NULL; nu.mode <- NULL; mu.mode <- NULL;
 	C.mode <- median(C.vals)
@@ -76,8 +72,8 @@ library(modeest)
 source("HDI.R")
 
 C.data <- ggs(out, family="C")
-nu.data <- ggs(out, family="nu")
-mu.data <- ggs(out, family="mu")
+nu.bar.data <- ggs(out, family="nu")
+mu.cv.data <- ggs(out, family="mu")
 
 plots.fitted2 <- list()
 
@@ -86,8 +82,8 @@ for(i in 1:4){
 	C.vals <- NULL; nu.vals <- NULL; mu.vals <- NULL;
 
 	C.vals <- subset(C.data, Parameter==paste("C[", i, "]", sep=""))$value
-	nu.vals <- subset(nu.data, Parameter==paste("nu[", i, "]", sep=""))$value
-	mu.vals <- subset(mu.data, Parameter==paste("mu[", i, "]", sep=""))$value
+	nu.vals <- subset(nu.bar.data, Parameter==paste("nu.bar[", i, "]", sep=""))$value
+	mu.vals <- subset(mu.cv.data, Parameter==paste("mu[", i, "]", sep=""))$value
 
 	C.mode <- NULL; nu.mode <- NULL; mu.mode <- NULL;
 	C.mode <- median(C.vals)
@@ -194,8 +190,8 @@ library(modeest)
 source("HDI.R")
 
 C.data <- ggs(out, family="C")
-nu.data <- ggs(out, family="nu")
-mu.data <- ggs(out, family="mu")
+nu.bar.data <- ggs(out, family="nu")
+mu.cv.data <- ggs(out, family="mu")
 
 plots.fitted3 <- list()
 
@@ -204,8 +200,8 @@ for(i in 1:4){
 	C.vals <- NULL; nu.vals <- NULL; mu.vals <- NULL;
 
 	C.vals <- subset(C.data, Parameter==paste("C[", i, "]", sep=""))$value
-	nu.vals <- subset(nu.data, Parameter==paste("nu[", i, "]", sep=""))$value
-	mu.vals <- subset(mu.data, Parameter==paste("mu[", i, "]", sep=""))$value
+	nu.vals <- subset(nu.bar.data, Parameter==paste("nu.bar[", i, "]", sep=""))$value
+	mu.vals <- subset(mu.cv.data, Parameter==paste("mu[", i, "]", sep=""))$value
 
 	C.mode <- NULL; nu.mode <- NULL; mu.mode <- NULL;
 	C.mode <- median(C.vals)
@@ -287,8 +283,8 @@ library(modeest)
 source("HDI.R")
 
 C.data <- ggs(out, family="C")
-nu.data <- ggs(out, family="nu")
-mu.data <- ggs(out, family="mu")
+nu.bar.data <- ggs(out, family="nu")
+mu.cv.data <- ggs(out, family="mu")
 
 P.error <- ggs(out, family="P")
 Y.error <- ggs(out, family="n.inf.na")
@@ -300,8 +296,8 @@ for(i in 1:4){
 	C.vals <- NULL; nu.vals <- NULL; mu.vals <- NULL;
 
 	C.vals <- subset(C.data, Parameter==paste("C[", i, "]", sep=""))$value
-	nu.vals <- subset(nu.data, Parameter==paste("nu[", i, "]", sep=""))$value
-	mu.vals <- subset(mu.data, Parameter==paste("mu[", i, "]", sep=""))$value
+	nu.vals <- subset(nu.bar.data, Parameter==paste("nu[", i, "]", sep=""))$value
+	mu.vals <- subset(mu.cv.data, Parameter==paste("mu[", i, "]", sep=""))$value
 	
 	C.mode <- NULL; nu.mode <- NULL; mu.mode <- NULL;
 	C.mode <- median(C.vals)

@@ -1,0 +1,14 @@
+model {
+  #### PRIORS #####
+
+  # FOR STUDENT-t #
+  mu ~ dnorm(0,.01)
+  sd ~ dunif(0,100)
+  tau <- 1 / (sd^2)
+
+  ### LIKELIHOOD ###
+  for(i in 1:length(K)){
+      K[i] ~ exp(dnorm( mu, tau))
+  }
+
+}
